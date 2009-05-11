@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<platform>
+    <!--
+    Groovy jars to load into the common classloader.
+    -->
+    <capability name="Groovy" common="yes">
+        <version>1.6-RC-1</version>
+        <classpath>${RIO_HOME}/lib/groovy/groovy-all-1.6-RC-1.jar</classpath>
+    </capability>    
+</platform>

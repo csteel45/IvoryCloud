@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<!--
+Deploy/Undeploy ant taskdefs
+-->
+<project name="deploy-taskdefs">
+
+	<!-- importing projects must redefine the following two properties -->
+	<property name="rio.lib" location="." />	
+	<property name="jini.lib" location="." />
+
+    <macrodef name="deploy" description="Deploy an opstring">
+		<attribute name="file" default="NOT SET"/>
+        <attribute name="groups" default="all"/>
+        <sequential>
+			<sequential>
+	           <cli file="@{file}" groups="@{groups}" command="deploy"/>
+			</sequential>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="undeploy" description="Undeploy an opstring">
+		<attribute name="file" default="NOT SET"/>
+        <attribute name="groups" default="all"/>
+        <sequential>
+           <cli file="@{file}" groups="@{groups}" command="undeploy"/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="cli" description="Invoke the CLI">
+		<attribute name="command" default="NOT SET"/>
+		<attribute name="file" default="NOT SET"/>
+        <attribute name="groups" default="all"/>
+        <sequential>
+			<!-- Check that a cli command has been supplied -->
+			<condition property="cli" value="@{command}">
+			    <and>
+			        <isfalse value="NOT SET" />
+			    </and>
+			</condition>
+			<fail>
+			    <condition>
+			        <not>
+			            <isset property="cli"/>
+			        </not>
+			    </condition>
+			    A CLI command must be provided
+			</fail>
+
+			<!-- Check the OperationalString file name has been supplied -->
+			<condition property="opstring" value="@{file}">
+			    <and>
+			        <isfalse value="NOT SET" />
+			    </and>
+			</condition>
+			<fail>
+			    <condition>
+			        <not>
+			            <isset property="opstring"/>
+			        </not>
+			    </condition>
+			    OperationalString file must be provided
+			</fail>
+
+            <!-- Get the correct script name -->
+			<condition property="script" value="rio.cmd">
+			    <os family="windows"/>
+			</condition>
+			<condition property="script" value="rio">
+			    <not>
+			      <os family="windows"/>
+			    </not>
+			  </condition>
+            <condition property="groups" value="@{groups}">
+                 <and>
+			        <isfalse value="all" />
+			    </and>
+            </condition>
+            <!-- Set httpRoots and timeout properties -->
+            <property name="roots" value="httpRoots=${rio.home}/deploy:${rio.home}/lib:${jini.home}/lib-dl"/>
+            <property name="timeouts" value="-t=5000 discoveryTimeout=10000"/>            
+	<!--echo>"Argline = ${rio.home}/bin/${script} ${cli} ${opstring}  -iu ${roots} ${timeouts} groups=${groups}"</echo-->
+    <exec dir="${basedir}" executable="${rio.home}/bin/${script}">
+			<arg line="${cli} ${opstring} -iu ${roots} ${timeouts} groups=${groups}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+
+    <macrodef name="oar" description="Package an OperationalString Archive">
+        <attribute name="name" default="NOT SET"/>
+        <attribute name="file" default="NOT SET"/>
+        <attribute name="version" default=""/>
+        <attribute name="opstring" default="NOT SET"/>
+        <attribute name="activation" default="Automatic"/>
+        <attribute name="lib.dir" default="lib"/>
+        <attribute name="opstring.dir" default="src/conf"/>
+        <sequential>
+            <!-- Check the OAR file name as been supplied -->
+            <condition property="oar.file" value="@{file}">
+                <and>
+                    <isfalse value="NOT SET" />
+                </and>
+            </condition>
+            <fail>
+                <condition>
+                    <not>
+                        <isset property="oar.file"/>
+                    </not>
+                </condition>
+                OAR file name must be provided
+            </fail>
+            <!-- Check the OAR name as been supplied -->
+            <condition property="oar.name" value="@{name}">
+                <and>
+                    <isfalse value="NOT SET" />
+                </and>
+            </condition>
+            <fail>
+                <condition>
+                    <not>
+                        <isset property="oar.name"/>
+                    </not>
+                </condition>
+                OAR Name must be provided
+            </fail>
+            <!-- Check the OAR opstring as been supplied -->
+            <condition property="oar.opstring" value="@{opstring}">
+                <and>
+                    <isfalse value="NOT SET" />
+                </and>
+            </condition>
+            <fail>
+                <condition>
+                    <not>
+                        <isset property="oar.opstring"/>
+                    </not>
+                </condition>
+                OAR OperationalString name must be provided
+            </fail>
+
+            <!--
+            <echo>oar.file = ${oar.file}</echo>
+            <echo>oar.name = ${oar.name}</echo>
+            <echo>oar.version = @{version}</echo>
+            <echo>oar.opstring = ${oar.opstring}</echo>
+            <echo>oar.activation = @{activation}</echo>
+            -->
+            <jar destfile="${oar.file}">
+                <manifest>
+                    <attribute name="OAR-Name" value="${oar.name}"/>
+                    <attribute name="OAR-Version" value="@{version}"/>
+                    <attribute name="OAR-OperationalString" value="${oar.opstring}"/>
+                    <attribute name="OAR-Activation" value="@{activation}"/>
+                </manifest>
+                <zipfileset dir="@{lib.dir}" prefix="@{lib.dir}"/>
+                <zipfileset dir="@{opstring.dir}" prefix="@{opstring.dir}"/>
+            </jar>
+        </sequential>
+    </macrodef>
+</project>

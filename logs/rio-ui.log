@@ -1,0 +1,26 @@
+===============================================
+Rio Monitor UI
+Log creation : Fri May 08 13:30:59 EDT 2009
+Operator : Christopher Steel
+===============================================
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: INDEGREE() = 0
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [_hover]
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [state] = 3
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [_hover]
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [state] = 0
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [state] = 1
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: ([state] = 2 OR [state] = 3)
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [state] = 4
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: [_hover]
+May 8, 2009 1:31:00 PM prefuse.data.expression.parser.ExpressionParser parse
+INFO: Parsed Expression: INGROUP('_focus_')
+ServiceVerificator [23] InterruptedException, exiting

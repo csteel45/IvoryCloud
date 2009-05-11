@@ -1,0 +1,1 @@
+keytool -genkeypair -v -alias "Ivory Cloud" -keysize 1024 -keystore keystore -storetype jceks -validity 9999 -dname "CN=Christopher Steel, OU=Cloud Spaces, O=Ivory Cloud, L=Ashburn, ST=VA, C=US" -storepass password -keypass password

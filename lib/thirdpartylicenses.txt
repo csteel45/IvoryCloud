@@ -1,0 +1,76 @@
+The following libraries are included in the Rio distribution because they are
+required either for building or running Rio. Note that each of these libraries
+is subject to the respective license. Check the respective project
+distribution/website before using any of them in your own applications.
+
+The Rio team would like to thank all the communities of the projects listed
+below for their contributions.
+------------------------------------------------------------------------------
+
+* apache-river/lib apache-river/lib-dl apache-river/lib-ext
+- Apache River (Jini) 2.1.1 (http://incubator.apache.org/river/RIVER)
+- Contain the binary distribution for the Apache River 2.1.1 release
+- Required to build and run Rio.
+- License: Apache License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0
+
+* cglib/cglib-nodep-2.1_3.jar
+- CGLIB 2.1_3 (http://cglib.sourceforge.net)
+- required for building the framework
+- required at runtime when proxying associations
+- License: Apache License, Version 1.1, http://www.apache.org/licenses/LICENSE-1.1
+
+* emory/emory-util-all.jar
+- Emory Utilities (http://dcl.mathcs.emory.edu/util)
+- Used to address URLClassLoader issues
+- License: Released into the public domain
+
+* emory/backport-util-concurrent.jar
+- Used for the TimeUnit that has a granularity of DAYS (will be replaced when
+  Java6 is used)
+- License: Released into the public domain
+
+* hyperic/
+- Hyperic SIGAR is used to obtain system utilization information
+- License: GPL with the Hyperic FLOSS License Exception (the Hyperic Exception
+  for Free/Libre and Open Source Software-only Applications Using Hyperic SIGAR
+  Libraries). The FLOSS license exception allows Hyperic SIAGR to be
+  included with the Rio Apache License v2 distribution. If for some reason the
+  GPL cannot be used with your distribution of Rio, remove the
+  RIO_HOME/lib/hyperic directory. 
+
+* jakarta-commons/commons-collections.jar
+- Commons Collections 3.2 (http://jakarta.apache.org/commons/collections)
+- Required at runtime if using Spring
+- License: Apache License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0
+
+* jakarta-commons/commons-logging.jar
+- Commons Logging 1.1 (http://jakarta.apache.org/commons/logging)
+- Required at runtime, as Spring uses it for all it's logging
+- License: Apache License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0
+
+* junit/junit-4.4.jar
+- JUnit (http://junit.org)
+- Required to build and run example clients
+- License: http://junit.sourceforge.net/cpl-v10.html
+
+* prefuse/prefuse.jar
+- The Prefuse Visualization Toolkit http://prefuse.org/
+- Used as the visualization component for the Rio Monitor UI
+- Required to build and run the Rio Monitor UI.
+- License: BSD License, http://prefuse.org/license-prefuse.txt
+
+* spring/spring.jar
+- Spring Framework 2.5 http://www.springframework.org/)
+- Required for building Rio, and as a runtime component when using Spring
+- License: Apache License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0
+
+* tools/classdepandjar.jar
+- Classdepandjar project (https://classdepandjar.dev.java.net)
+- Required to build Rio
+- License: Apache License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0
+
+* tools/jarbundler-2.0.0.jar
+- JarBundler project (http://informagen.com/JarBundler/)
+- Required for building the Rio UI as a Mac OSX application
+- License: Apache License, Version 2.0, http://www.apache.org/licenses/LICENSE-2.0
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Rio App -->
+<jnlp spec="1.0+" codebase="http://csteel:9010/" href="rio.jnlp">
+	<information>
+		<title>Cloud Spaces</title>
+		<vendor>Ivory Cloud</vendor>
+		<homepage href="doc/index.html"/>
+		<description>Rio Launcher</description>
+		<description kind="short">Rio application.</description>
+		<icon href="rio_banner.png"/>
+		<offline-allowed/>
+	</information>
+	<security>
+ 		<all-permissions/>
+	</security>
+	<resources>
+		<j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />
+		<!--jar href="rio-install.jar"/-->
+		<jar href="start.jar"/>
+		<jar href="jsk-platform.jar"/>
+		<extension href="extensions.jnlp"/>
+	</resources>
+	<!--application-desc main-class="com.izforge.izpack.installer.Installer"/-->
+	<application-desc main-class="com.sun.jini.start.ServiceStarter"/>
+</jnlp>

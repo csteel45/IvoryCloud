@@ -1,0 +1,17 @@
+<?xml-version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Cloud Spaces-->
+<jnlp spec="1.0+" codebase="http://csteel:9010/" href="extensions.jnlp">
+	<information>
+		<title>Java Extensions</title>
+		<vendor>Sun Microsystems, Inc.</vendor>
+		<description kind="tooltip">Extensions</description>
+	</information>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+	</resources>
+	<component-desc/>
+</jnlp>
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>
+<HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META name="GENERATOR" content="Mozilla/4.73 [en] (WinNT; U) [Netscape]">
+    <META name="Author" content="Christopher Steel">
+    <META name="Keywords" content="RIO">
+    <TITLE>RIO Installer</TITLE>
+</HEAD>
+<BODY>
+<CENTER><H1>RIO Home Page</H1></CENTER>
+<BR><BR>
+
+<SCRIPT LANGUAGE="Javascript">
+   var javawsInstalled = 0;
+   isIE = "false";
+
+   if (navigator.mimeTypes && navigator.mimeTypes.length) {
+      x = navigator.mimeTypes['application/x-java-jnlp-file'];
+      if (x) javawsInstalled = 1;
+    } else {
+      isIE = "true";
+    }
+
+    function insertLink(url, name) {
+       if (javawsInstalled) {
+          document.write("<a href=" + url + ">"  + name + "</a>");
+       } else {
+          document.write("Need to install Java Web Start");
+       }
+    }
+
+    function launchLink(imageUrl, jnlpUrl, title, desc) {
+       var realUrl = "http://java.sun.com/products/javawebstart/needdownload.html";
+       if (javawsInstalled) {
+         realUrl = jnlpUrl;
+       }
+       document.write("<center><div align=center>");
+       document.write("<a href=" + realUrl + "><img src=" + imageUrl + "></a></div>");
+       document.write("<form action=\"" + realUrl + "\" METHOD=\"GET\"><input type=\"submit\" value=\"Launch\"></form>");
+       document.write("</center>");
+    }
+</SCRIPT>
+
+<SCRIPT LANGUAGE="VBScript">
+
+on error resume next
+If isIE = "true" Then
+  If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then
+     javawsInstalled = 0
+  Else
+    javawsInstalled = 1
+  End If
+End If
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE="Javascript" TYPE="text/javascript">
+<!--
+ launchLink("rio_banner.png", "rio.jnlp", 134, 125);
+// -->
+
+</SCRIPT>
+
+<B><BR><BR><BR><BR><BR><BR>
+<CENTER><B>Project RIO, 2008</B></CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/boot.jar"/>
+	<classpathentry kind="lib" path="lib/cybernode.jar"/>
+	<classpathentry kind="lib" path="lib/jsk-lib.jar"/>
+	<classpathentry kind="lib" path="lib/rio.jar" sourcepath="/Rio/src/main/java"/>
+	<classpathentry kind="lib" path="lib/classdepandjar.jar"/>
+	<classpathentry kind="lib" path="lib/rio-cli.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/browser.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/destroy.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/jsk-lib.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/jsk-platform.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/jsk-resources.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/mahalo.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/outrigger-snaplogstore.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/outrigger.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/reggie.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/serviceui.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib/start.jar"/>
+	<classpathentry kind="lib" path="lib/apache-river/lib-ext/jsk-policy.jar"/>
+	<classpathentry kind="lib" path="lib/cglib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="lib/emory/backport-util-concurrent.jar"/>
+	<classpathentry kind="lib" path="lib/emory/emory-util-io.jar"/>
+	<classpathentry kind="lib" path="lib/emory/emory-util-security.jar"/>
+	<classpathentry kind="lib" path="lib/groovy/groovy-all-1.6-RC-1.jar"/>
+	<classpathentry kind="lib" path="lib/hyperic/sigar.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-collections.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring.jar"/>
+	<classpathentry kind="lib" path="lib/prefuse/prefuse.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-all-1.6-RC-1.jar"/>
+	<classpathentry kind="lib" path="lib/tools/classdepandjar.jar"/>
+	<classpathentry kind="lib" path="lib/tools/jarbundler-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/tools/jmx-lookup.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

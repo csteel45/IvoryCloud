@@ -1,0 +1,1 @@
+java -Djava.security.policy=policy.all -jar ../jini2_1/lib/start.jar ../config/start-persistent-outrigger.config

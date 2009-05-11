@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+<project name="Trading Grid" default="all">
+    <!-- import the common elements -->
+    <property name="rio.home" value="."/>
+    <property name="jini.home" value="./lib/apache-river"/>
+
+    <property environment="env."/>
+    <property name="rio.lib" location="${rio.home}/lib"/>
+    <property name="deploy.dir" location="${rio.home}/deploy"/>
+    <property name="jini.lib" location="${jini.home}/lib"/>
+
+    <echo message="jini.lib : ${jini.lib}" />
+    <echo message="rio.lib  : ${rio.lib}" />
+
+    <!--
+    Jars required to build and run Rio
+    -->
+    <path id="required.jars">
+        <pathelement location="${jini.lib}/jsk-platform.jar"/>
+        <pathelement location="${jini.lib}/jsk-lib.jar"/>
+        <pathelement location="${rio.lib}/rio.jar"/>
+    </path>
+
+    <!--
+    Jars needed to bootstrap a complete Rio environment. This is what you would
+    need if you wanted to enable a StaticCybernode
+    -->
+    <path id="bootstrap.jars">
+        <pathelement location="${rio.lib}/cglib/cglib-nodep-2.1_3.jar"/>
+        <pathelement location="${jini.lib}/start.jar"/>
+        <pathelement location="${jini.lib}/jsk-platform.jar"/>
+        <pathelement location="${jini.lib}/jsk-lib.jar"/>
+        <pathelement location="${rio.lib}/boot.jar"/>
+        <pathelement location="${rio.lib}/groovy/groovy-all-1.6-RC-1.jar"/>
+        <pathelement location="${rio.lib}/rio.jar"/>
+        <pathelement location="${rio.lib}/cybernode.jar"/>
+    </path>
+    <property name="name" value="tradinggrid"/>
+    <property name="lib" value="${basedir}/lib"/>
+    <property name="build" value="${basedir}/build"/>
+    <property name="classes" value="${build}/classes"/>
+    <property name="src" value="${basedir}/src"/>
+
+
+    <taskdef name="classdepandjar"
+             classname="org.jini.rio.tools.ant.ClassDepAndJarTask">
+        <classpath location="${rio.lib}/tools/classdepandjar.jar"/>
+    </taskdef>
+
+        <taskdef name="classdep" classname="org.jini.rio.tools.ant.ClassDepTask">
+        <classpath location="${rio.lib}/tools/classdepandjar.jar"/>
+    </taskdef>
+
+    <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
+        <classpath>
+            <path location="${rio.lib}/groovy/groovy-all-1.6-RC-1.jar"/>
+            <path location="${rio.lib}/junit/junit-4.4.jar"/>
+            <path refid="project.classpath"/>
+        </classpath>
+    </taskdef>
+    <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc"
+             classpath="${rio.lib}/groovy/groovy-all-1.6-RC-1.jar"/>
+
+    <condition property="jarbundler-available">
+        <available classname="net.sourceforge.jarbundler.AppBundleProperties"
+                   classpath="${rio.lib}/tools/jarbundler-2.0.0.jar"/>
+    </condition>
+
+    <import file="deploy-tasks.xml"/>
+
+    <path id="project.classpath">
+        <pathelement location="${classes}"/>
+        <path refid="required.jars"/>
+    </path>
+
+    <target name="prepare"
+            description="Creates required directories">
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${lib}"/>
+        <mkdir dir="${deploy.dir}/${name}/lib"/>
+    </target>
+
+    <target name="clean" description="Removes files and directories created
+                         during the build and install process">
+        <delete verbose="true" failonerror="false" dir="${build}"/>
+        <delete verbose="true" failonerror="false" dir="${deploy.dir}/${name}"/>
+    </target>
+
+    <fileset dir="${src}">
+        <patternset id="java.source">
+            <include name="**/*.java"/>
+        </patternset>
+    </fileset>
+
+    <fileset dir="${lib}">
+        <patternset id="resources">
+            <include name="**/*.jar"/>
+        </patternset>
+    </fileset>
+
+    <target name="compile" depends="prepare">
+        <javac srcdir="${src}" destdir="${classes}"
+               deprecation="yes" debug="on">
+            <classpath refid="project.classpath"/>
+            <patternset refid="java.source"/>
+        </javac>
+    </target>
+
+    <target name="install"
+            depends="jars"
+            description="Installs the jars into the deploy directory">
+        <copy todir="${deploy.dir}/${name}">
+            <fileset dir="${basedir}">
+                <patternset refid="resources"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="all" depends="prepare, install"/>
+    
+    <target name="jars" depends="impl-jar, download-jar"/>
+
+    <target name="impl-jar" depends="compile">
+        <jar destfile="${lib}/tradinggrid.jar"
+             basedir="${classes}"
+             includes="**">
+            <fileset dir="${src}/main/resources" />
+        </jar>
+    </target>
+
+    <target name="download-jar" depends="compile">
+        <jar destfile="${lib}/tradinggrid-dl.jar"
+             basedir="${classes}"
+             includes="**/**.class"/>
+    </target>
+
+    <target name="deploy">
+        <deploy file="src/main/conf/tradinggrid.xml"/>
+    </target>
+
+    <target name="undeploy">
+        <undeploy file="src/main/conf/tradinggrid.xml"/>
+    </target>
+
+	<target name="redeploy" depends="clean,install,deploy">
+    </target>
+
+    <target name="client">
+        <java classname="tradinggrid.client.EnterpriseClient" fork="yes">
+            <classpath>
+                <pathelement location="${lib}/tradinggrid.jar"/>
+                <path refid="required.jars"/>
+            </classpath>
+        </java>
+    </target>  
+
+</project>
