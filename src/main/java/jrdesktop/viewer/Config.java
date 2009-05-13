@@ -20,6 +20,7 @@ public class Config {
     public static void loadConfiguration() {
         if (new File(main.VIEWER_CONFIG_FILE).canRead())
             try {
+            	System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
                 Properties properties = new Properties();            
                 properties.load(new FileInputStream(main.VIEWER_CONFIG_FILE));
                 

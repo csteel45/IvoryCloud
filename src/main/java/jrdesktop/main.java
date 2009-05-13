@@ -22,9 +22,9 @@ public class main {
     public static final URL START_ICON = main.class.getResource("images/player_play.png");
     public static final URL STOP_ICON = main.class.getResource("images/player_stop.png");
  
-    public static String CONFIG_FILE;
-    public static String SERVER_CONFIG_FILE;
-    public static String VIEWER_CONFIG_FILE;
+    public static String CONFIG_FILE = getCurrentDirectory() + "config";
+    public static String SERVER_CONFIG_FILE = getCurrentDirectory() + "server.config";
+    public static String VIEWER_CONFIG_FILE = getCurrentDirectory() + "viewer.config";
         
     public static void main (String args[]) {          
         if (System.getSecurityManager() == null)
@@ -33,7 +33,7 @@ public class main {
         CONFIG_FILE = getCurrentDirectory() + "config";
         SERVER_CONFIG_FILE = getCurrentDirectory() + "server.config";
         VIEWER_CONFIG_FILE = getCurrentDirectory() + "viewer.config";       
-    
+        System.out.println("000000000000000000000000000000000000000000000000000000000000 cur dir: " + getCurrentDirectory());  
         System.getProperties().remove("java.rmi.server.hostname");        
                           
         if (args.length > 0) {                    
