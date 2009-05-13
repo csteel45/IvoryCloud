@@ -21,6 +21,8 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import jrdesktop.server.rmi.Server;
+
 import net.jini.core.event.EventRegistration;
 import net.jini.core.event.RemoteEventListener;
 import net.jini.core.event.UnknownEventException;
@@ -67,6 +69,10 @@ public class EventServiceImpl implements EventService {
 //        context.getWatchRegistry().register(watch);
 
         logger.info("Initialized EventServiceImpl");
+
+		jrdesktop.server.Config.SetConfiguration(4545);        
+        Server.Start();
+        logger.info("Started remote desktop server on port 4545");
     }
 
 	/* (non-Javadoc)
@@ -91,6 +97,16 @@ public class EventServiceImpl implements EventService {
         } catch (Exception e) {
             logger.warning("Exception publishing event: " + event + " : " + e);
         }
+	}
+	
+	public String getHostIP() throws RemoteException{
+		try {
+			System.out.println("COMPUTERNAME env = " + java.net.InetAddress.getAllByName(System.getenv("COMPUTERNAME"))[0].getHostAddress());
+			return java.net.Inet4Address.getLocalHost().getHostAddress();
+		}
+		catch(Exception e) {
+			throw new RemoteException("Server exception: " + e);
+		}
 	}
 
 	/* (non-Javadoc)

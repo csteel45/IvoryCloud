@@ -39,5 +39,6 @@ public interface EventService extends EventProducer {
 	public EventRegistration registerA(EventDescriptor descriptor,
 			RemoteEventListener listener, MarshalledObject handback,
 			long duration) throws LeaseDeniedException, UnknownEventException, RemoteException;
+	public String getHostIP() throws RemoteException;
 
 }
