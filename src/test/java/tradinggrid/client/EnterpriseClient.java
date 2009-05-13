@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import jrdesktop.viewer.rmi.Viewer;
+
 import net.jini.core.lookup.ServiceItem;
 import net.jini.core.lookup.ServiceTemplate;
 import net.jini.discovery.LookupDiscoveryManager;
@@ -130,6 +132,10 @@ public class EnterpriseClient {
 				System.out.println("Event service not discovered, make sure "
 						+ "it is deployed");
 			}
+	        System.out.println("Host returned: " + ((EventService)(item2.service)).getHostIP());       
+	        jrdesktop.viewer.Config.SetConfiguration(((EventService)(item2.service)).getHostIP(), 4545);       
+	        new Viewer().Start();     
+
 	    	Thread.sleep(5000);
 		} 
 		else {
