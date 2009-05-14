@@ -23,12 +23,12 @@ public class robot {
 
     private Robot rt;
 
-    private Toolkit tk = null;
+    private Toolkit toolkit = null;
     private Rectangle screenRect;
     
     public robot() {
-        tk = Toolkit.getDefaultToolkit();
-        screenRect = new Rectangle(tk.getScreenSize()); 
+        toolkit = Toolkit.getDefaultToolkit();
+        screenRect = new Rectangle(toolkit.getScreenSize()); 
         try {               
             rt = new Robot();
         }
@@ -38,7 +38,7 @@ public class robot {
     }
 
     public BufferedImage captureScreen() {    
-        screenRect = new Rectangle(tk.getScreenSize()); 
+        screenRect = new Rectangle(toolkit.getScreenSize()); 
         return rt.createScreenCapture(screenRect); 
     }
 
@@ -54,7 +54,7 @@ public class robot {
         ArrayList Objects = (ArrayList) object;     
         for (int i=0; i<Objects.size(); i++) {            
             Object obj = Objects.get(i);
-
+System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ updateData object: " + obj.toString());
             if (obj instanceof MouseEvent)
                 applyMouseEvent((MouseEvent)obj);
             else if (obj instanceof KeyEvent)
