@@ -51,7 +51,8 @@ public class ViewerGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(" jrdesktop Viewer");
-        setIconImage(new ImageIcon(main.WAIT_ICON).getImage());
+    	//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ viewer config = " + main.dir);
+        //setIconImage(new ImageIcon(main.WAIT_ICON).getImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
