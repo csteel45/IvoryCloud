@@ -17,8 +17,6 @@ import java.rmi.RemoteException;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import jrdesktop.server.rmi.Server;
-
 import net.jini.core.lookup.ServiceItem;
 import net.jini.core.lookup.ServiceTemplate;
 import net.jini.discovery.LookupDiscoveryManager;
@@ -103,7 +101,7 @@ public class TranslatorImpl implements Translator {
 			}
 		};
 
-        new Thread(runner).start();
+		new Thread(runner).start();
 	}
 
 	@SuppressWarnings("unchecked")
