@@ -12,18 +12,19 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  -->
-<project name="Trading Grid" default="all">
+<project name="CloudBase" default="all">
     <!-- import the common elements -->
-    <property name="rio.home" value="."/>
-    <property name="jini.home" value="./lib/apache-river"/>
+    <property name="cloudbase.home" value="."/>
+    <property name="rio.home" value="${cloudbase.home}"/>
+    <property name="jini.home" value="${rio.home}/lib/apache-river"/>
 
     <property environment="env."/>
     <property name="rio.lib" location="${rio.home}/lib"/>
     <property name="deploy.dir" location="${rio.home}/deploy"/>
     <property name="jini.lib" location="${jini.home}/lib"/>
 
-    <echo message="jini.lib : ${jini.lib}" />
     <echo message="rio.lib  : ${rio.lib}" />
+    <echo message="jini.lib : ${jini.lib}" />
 
     <!--
     Jars required to build and run Rio
@@ -48,7 +49,7 @@
         <pathelement location="${rio.lib}/rio.jar"/>
         <pathelement location="${rio.lib}/cybernode.jar"/>
     </path>
-    <property name="name" value="tradinggrid"/>
+    <property name="name" value="cloudbase"/>
     <property name="lib" value="${basedir}/lib"/>
     <property name="build" value="${basedir}/build"/>
     <property name="classes" value="${build}/classes"/>
@@ -60,7 +61,7 @@
         <classpath location="${rio.lib}/tools/classdepandjar.jar"/>
     </taskdef>
 
-        <taskdef name="classdep" classname="org.jini.rio.tools.ant.ClassDepTask">
+    <taskdef name="classdep" classname="org.jini.rio.tools.ant.ClassDepTask">
         <classpath location="${rio.lib}/tools/classdepandjar.jar"/>
     </taskdef>
 
@@ -71,6 +72,7 @@
             <path refid="project.classpath"/>
         </classpath>
     </taskdef>
+
     <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc"
              classpath="${rio.lib}/groovy/groovy-all-1.6-RC-1.jar"/>
 
@@ -86,19 +88,6 @@
         <path refid="required.jars"/>
     </path>
 
-    <target name="prepare"
-            description="Creates required directories">
-        <mkdir dir="${classes}"/>
-        <mkdir dir="${lib}"/>
-        <mkdir dir="${deploy.dir}/${name}/lib"/>
-    </target>
-
-    <target name="clean" description="Removes files and directories created
-                         during the build and install process">
-        <delete verbose="true" failonerror="false" dir="${build}"/>
-        <delete verbose="true" failonerror="false" dir="${deploy.dir}/${name}"/>
-    </target>
-
     <fileset dir="${src}">
         <patternset id="java.source">
             <include name="**/*.java"/>
@@ -107,9 +96,22 @@
 
     <fileset dir="${lib}">
         <patternset id="resources">
-            <include name="**/*.jar"/>
+            <include name="**/cloud*.jar"/>
         </patternset>
     </fileset>
+
+    <target name="clean" description="Removes files and directories created
+                         during the build and install process">
+        <delete verbose="true" failonerror="false" dir="${build}"/>
+        <delete verbose="true" failonerror="false" dir="${deploy.dir}/${name}"/>
+    </target>
+
+    <target name="prepare"
+            description="Creates required directories">
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${lib}"/>
+        <mkdir dir="${deploy.dir}/${name}/lib"/>
+    </target>
 
     <target name="compile" depends="prepare">
         <javac srcdir="${src}" destdir="${classes}"
@@ -119,22 +121,8 @@
         </javac>
     </target>
 
-    <target name="install"
-            depends="jars"
-            description="Installs the jars into the deploy directory">
-        <copy todir="${deploy.dir}/${name}">
-            <fileset dir="${basedir}">
-                <patternset refid="resources"/>
-            </fileset>
-        </copy>
-    </target>
-
-    <target name="all" depends="prepare, install"/>
-    
-    <target name="jars" depends="impl-jar, download-jar"/>
-
     <target name="impl-jar" depends="compile">
-        <jar destfile="${lib}/tradinggrid.jar"
+        <jar destfile="${lib}/cloudbase.jar"
              basedir="${classes}"
              includes="**">
             <fileset dir="${src}/main/resources" />
@@ -142,29 +130,43 @@
     </target>
 
     <target name="download-jar" depends="compile">
-        <jar destfile="${lib}/tradinggrid-dl.jar"
+        <jar destfile="${lib}/cloudbase-dl.jar"
              basedir="${classes}"
              includes="**/**.class"/>
     </target>
 
+    <target name="jars" depends="impl-jar, download-jar"/>
+
+    <target name="install" depends="jars"
+            description="Installs the jars into the deploy directory">
+        <echo message="install copy todir = ${deploy.dir}/${name}" /> 
+        <copy todir="${deploy.dir}/${name}/lib">
+            <fileset dir="${lib}">
+                <patternset refid="resources"/>
+            </fileset>
+        </copy>
+    </target>
+    
     <target name="deploy">
-        <deploy file="src/main/conf/tradinggrid.xml"/>
+        <deploy file="src/main/conf/cloudbase.xml"/>
     </target>
 
     <target name="undeploy">
-        <undeploy file="src/main/conf/tradinggrid.xml"/>
+        <undeploy file="src/main/conf/cloudbase.xml"/>
     </target>
 
-	<target name="redeploy" depends="clean,install,deploy">
+	<target name="redeploy" depends="install,deploy">
     </target>
 
     <target name="client">
-        <java classname="tradinggrid.client.EnterpriseClient" fork="yes">
+        <java classname="cloudbase.client.EnterpriseClient" fork="yes">
             <classpath>
-                <pathelement location="${lib}/tradinggrid.jar"/>
+                <pathelement location="${lib}/cloudbase.jar"/>
                 <path refid="required.jars"/>
             </classpath>
         </java>
     </target>  
+
+    <target name="all" depends="prepare, install"/>
 
 </project>
