@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <!DOCTYPE opstring SYSTEM "java://org/jini/rio/dtd/rio_opstring.dtd">
 <opstring>
-    <OperationalString Name="Trading Grid Example">
+    <OperationalString Name="Cloud Base">
         <Groups>
             <Group>rio</Group>
         </Groups>
 
 		<Logging>
 			<Logger Name="ivorycloud" Level="ALL">
-				<Handler ClassName="java.util.logging.ConsoleHandler" Level="ALL"></Handler>
+				<Handler ClassName="java.util.logging.ConsoleHandler" Level="FINE"></Handler>
 			</Logger>
 		</Logging>
 		
         <!--
-        Declare attributes for the Spring example. The spring bean
+        Declare attributes for the Spring-based service. The CloudBase spring bean
         configuration will be loaded as a classpath resource from the
         service's classpath, declared by the JARs of the Implementation class
         -->
-        <SpringBean Name="Translator" config="trading-grid.xml">
+        <SpringBean Name="Translator" config="cloud-base.xml">
 
             <Interfaces>
-                <Interface>com.ivorycloud.tradinggrid.Translator</Interface>
+                <Interface>com.ivorycloud.cloudbase.Translator</Interface>
                 <Resources>
-                    <JAR>tradinggrid/lib/tradinggrid-dl.jar</JAR>
+                    <JAR>cloudbase/lib/cloudbase-dl.jar</JAR>
                 </Resources>
             </Interfaces>
 
-            <ImplementationClass>com.ivorycloud.tradinggrid.service.TranslatorImpl
+            <ImplementationClass>com.ivorycloud.cloudbase.service.TranslatorImpl
                 <Resources>
-                    <JAR>tradinggrid/lib/tradinggrid.jar</JAR>
+                    <JAR>cloudbase/lib/cloudbase.jar</JAR>
                 </Resources>
             </ImplementationClass>
                         
-            <Maintain>22</Maintain>
-            <MaxPerMachine>5</MaxPerMachine>
+            <Maintain>2</Maintain>
+            <MaxPerMachine>1</MaxPerMachine>
             
             
         </SpringBean>
  
-        <SpringBean Name="BillingService" config="trading-grid.xml">
+        <SpringBean Name="BillingService" config="cloud-base.xml">
 
             <Interfaces>
-                <Interface>com.ivorycloud.tradinggrid.BillingService</Interface>
+                <Interface>com.ivorycloud.cloudbase.BillingService</Interface>
                 <Resources>
-                    <JAR>tradinggrid/lib/tradinggrid-dl.jar</JAR>
+                    <JAR>cloudbase/lib/cloudbase-dl.jar</JAR>
                 </Resources>
             </Interfaces>
 
-            <ImplementationClass>com.ivorycloud.tradinggrid.service.BillingServiceImpl
+            <ImplementationClass>com.ivorycloud.cloudbase.service.BillingServiceImpl
                 <Resources>
-                    <JAR>tradinggrid/lib/tradinggrid.jar</JAR>
+                    <JAR>cloudbase/lib/cloudbase.jar</JAR>
                 </Resources>
             </ImplementationClass>
                         
             <Maintain>1</Maintain>
         </SpringBean>
  
-        <SpringBean Name="EventService" config="trading-grid.xml">
+        <SpringBean Name="EventService" config="cloud-base.xml">
 
             <Interfaces>
                 <Interface>com.ivorycloud.event.EventService</Interface>
                 <Resources>
-                    <JAR>tradinggrid/lib/tradinggrid-dl.jar</JAR>
+                    <JAR>cloudbase/lib/cloudbase-dl.jar</JAR>
                 </Resources>
             </Interfaces>
 
             <ImplementationClass>com.ivorycloud.event.EventServiceImpl
                 <Resources>
-                    <JAR>tradinggrid/lib/tradinggrid.jar</JAR>
+                    <JAR>cloudbase/lib/cloudbase.jar</JAR>
                 </Resources>
             </ImplementationClass>
                         

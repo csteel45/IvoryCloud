@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE opstring SYSTEM "java://org/jini/rio/dtd/rio_opstring.dtd">
+<opstring>
+    <OperationalString Name="Cloud Billing">
+        <Groups>
+            <Group>rio</Group>
+        </Groups>
+
+		<Logging>
+			<Logger Name="billing" Level="ALL">
+				<Handler ClassName="java.util.logging.ConsoleHandler" Level="FINE"></Handler>
+			</Logger>
+		</Logging>
+		
+        <!--
+        Declare attributes for the Spring-based service. The CloudBase spring bean
+        configuration will be loaded as a classpath resource from the
+        service's classpath, declared by the JARs of the Implementation class
+        -->
+        <SpringBean Name="BillingService" config="cloud-billing.xml">
+
+            <Interfaces>
+                <Interface>com.ivorycloud.cloudbase.BillingService</Interface>
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbilling-dl.jar</JAR>
+                </Resources>
+            </Interfaces>
+
+            <ImplementationClass>com.ivorycloud.billing.service.BillingServiceImpl
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbilling.jar</JAR>
+                </Resources>
+            </ImplementationClass>
+                        
+            <Maintain>1</Maintain>
+        </SpringBean>
+         
+    </OperationalString>
+</opstring>
+
+

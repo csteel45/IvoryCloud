@@ -4,11 +4,11 @@
 
 <beans>
 	<!-- Declaration of Translator -->
-	<bean id="Translator" class="com.ivorycloud.tradinggrid.service.TranslatorImpl">
+	<bean id="Translator" class="com.ivorycloud.cloudbase.service.TranslatorImpl">
 	</bean>
 
 	<!-- Declaration of Billing Service -->
-	<bean id="BillingService" class="com.ivorycloud.tradinggrid.service.BillingServiceImpl">
+	<bean id="BillingService" class="com.ivorycloud.cloudbase.service.BillingServiceImpl">
 	</bean>
 
 	<!-- Declaration of Event Service -->

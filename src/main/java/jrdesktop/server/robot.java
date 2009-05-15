@@ -54,7 +54,7 @@ public class robot {
         ArrayList Objects = (ArrayList) object;     
         for (int i=0; i<Objects.size(); i++) {            
             Object obj = Objects.get(i);
-System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ updateData object: " + obj.toString());
+            System.out.println("robot.updateData object: " + obj.toString());
             if (obj instanceof MouseEvent)
                 applyMouseEvent((MouseEvent)obj);
             else if (obj instanceof KeyEvent)
