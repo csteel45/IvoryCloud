@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ivorycloud.tradinggrid;
+package com.ivorycloud.cloudbase;
 
 import org.rioproject.event.EventDescriptor;
 import org.rioproject.event.RemoteServiceEvent;

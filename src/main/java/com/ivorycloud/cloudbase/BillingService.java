@@ -11,11 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ivorycloud.tradinggrid;
+package com.ivorycloud.cloudbase;
 
 import java.rmi.RemoteException;
 
-public interface Translator {
+public interface BillingService {
     String hello(String message) throws RemoteException;
 }
 

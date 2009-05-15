@@ -1,10 +1,11 @@
-package com.ivorycloud.tradinggrid;
+package com.ivorycloud.cloudbase;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import net.jini.core.entry.Entry;
 
-public class FileEntry implements Entry {
+public class Envelope implements Entry {
 
 	/**
 	 * 
@@ -17,11 +18,11 @@ public class FileEntry implements Entry {
 	public ByteArray data = null;
 	public Date timeReceived = null;
 	
-	public FileEntry() {
+	public Envelope() {
 		
 	}
 	
-	public FileEntry(String fileName) {
+	public Envelope(String fileName) {
 		this.fileName = fileName;
 	}
 

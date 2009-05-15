@@ -11,34 +11,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ivorycloud.tradinggrid;
+package com.ivorycloud.cloudbase;
 
 import org.rioproject.event.EventDescriptor;
 import org.rioproject.event.RemoteServiceEvent;
-
-
 
 /**
  * The HelloEvent is a RemoteServiceEvent
  * 
  * @see org.jini.rio.event.RemoteServiceEvent
  */
-public class FileParsedEvent extends RemoteServiceEvent {
-	private static final long serialVersionUID = 1L;
+
+public class FileReceivedEvent extends RemoteServiceEvent {
+ 	private static final long serialVersionUID = 3576664632353719702L;
 	/** A unique id number for the hello event **/
-	
-    public static final long ID = 9999999999L;
+    public static final long ID = 0L;
     /** Holds the property for the time the event was created */
     private long when;
     /** Holds the message property */
     private String message;
+    private String fileName;
+    private String customerID;
+    
+    public String getCustomerID() {
+		return customerID;
+	}
 
-    /**
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	/**
      * Creates a HelloEvent with no message
      *
      * @param source The event source
      */
-    public FileParsedEvent(Object source) {
+    public FileReceivedEvent(Object source) {
         this(source, null);
     }
 
@@ -48,10 +64,11 @@ public class FileParsedEvent extends RemoteServiceEvent {
      * @param source The event source
      * @param message The message
      */
-    public FileParsedEvent(Object source, String message) {
+    public FileReceivedEvent(Object source, String message) {
         super(source);
         this.message = message;
         when = System.currentTimeMillis();
+        this.setSequenceNumber(seqNum++);
     }
 
     /**
@@ -78,6 +95,6 @@ public class FileParsedEvent extends RemoteServiceEvent {
      * @return The EventDescriptor for this event
      */
     public static EventDescriptor getEventDescriptor() {
-        return (new EventDescriptor(FileParsedEvent.class, ID));
+        return (new EventDescriptor(FileReceivedEvent.class, ID));
     }
 }

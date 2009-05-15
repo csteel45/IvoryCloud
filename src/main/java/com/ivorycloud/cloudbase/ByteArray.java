@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ivorycloud.tradinggrid;
+package com.ivorycloud.cloudbase;
 
 import java.io.Serializable;
 

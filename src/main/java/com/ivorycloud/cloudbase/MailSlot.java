@@ -1,4 +1,4 @@
-package com.ivorycloud.tradinggrid;
+package com.ivorycloud.cloudbase;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -11,7 +11,7 @@ import net.jini.lookup.ServiceDiscoveryManager;
 
 public class MailSlot {
     @SuppressWarnings("unchecked")
-	private Class[] classes = new Class[]{com.ivorycloud.tradinggrid.PostOffice.class};
+	private Class[] classes = new Class[]{com.ivorycloud.cloudbase.PostOffice.class};
     private ServiceTemplate tmpl = new ServiceTemplate(null, classes, null);
 	private LookupDiscoveryManager ldm = null;
 	private PostOffice postOffice = null;
