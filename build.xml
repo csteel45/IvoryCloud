@@ -55,6 +55,10 @@
     <property name="classes" value="${build}/classes"/>
     <property name="src" value="${basedir}/src"/>
 
+    <path id="project.classpath">
+        <pathelement location="${classes}"/>
+        <path refid="required.jars"/>
+    </path>
 
     <taskdef name="classdepandjar"
              classname="org.jini.rio.tools.ant.ClassDepAndJarTask">
@@ -82,11 +86,6 @@
     </condition>
 
     <import file="deploy-tasks.xml"/>
-
-    <path id="project.classpath">
-        <pathelement location="${classes}"/>
-        <path refid="required.jars"/>
-    </path>
 
     <fileset dir="${src}">
         <patternset id="java.source">
@@ -158,8 +157,17 @@
 	<target name="redeploy" depends="install,deploy">
     </target>
 
-    <target name="client">
+    <target name="client" depends="impl-jar">
         <java classname="cloudbase.client.EnterpriseClient" fork="yes">
+            <classpath>
+                <pathelement location="${lib}/cloudbase.jar"/>
+                <path refid="required.jars"/>
+            </classpath>
+        </java>
+    </target>  
+
+    <target name="installclient" depends="impl-jar">
+        <java classname="cloudbase.client.InstallClient" fork="yes">
             <classpath>
                 <pathelement location="${lib}/cloudbase.jar"/>
                 <path refid="required.jars"/>

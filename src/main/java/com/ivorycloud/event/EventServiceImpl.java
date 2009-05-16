@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import jrdesktop.server.rmi.Server;
-
 import net.jini.core.event.EventRegistration;
 import net.jini.core.event.RemoteEventListener;
 import net.jini.core.event.UnknownEventException;
@@ -31,7 +30,6 @@ import net.jini.core.lease.LeaseDeniedException;
 import org.rioproject.core.jsb.ServiceBeanContext;
 import org.rioproject.event.DispatchEventHandler;
 import org.rioproject.event.EventDescriptor;
-import org.rioproject.event.NoEventConsumerException;
 import org.rioproject.event.RemoteServiceEvent;
 import org.rioproject.watch.StopWatch;
 
@@ -48,7 +46,8 @@ public class EventServiceImpl implements EventService {
     private StopWatch watch = null;
     /** The Logger for this example */
     static Logger logger = Logger.getLogger("event");
-    HashMap handlers = new HashMap();
+    HashMap<EventDescriptor, DispatchEventHandler> handlers = 
+    	new HashMap<EventDescriptor, DispatchEventHandler>();
 
     /**
 	 * @param descriptor
@@ -65,8 +64,8 @@ public class EventServiceImpl implements EventService {
                                                                   Exception {
 
         // Create the stop watch, and register the stop watch
-//        watch = new StopWatch("EventServiceImplWatch");
-//        context.getWatchRegistry().register(watch);
+        watch = new StopWatch("EventServiceImplWatch");
+        context.getWatchRegistry().register(watch);
 
         logger.info("Initialized EventServiceImpl");
 
@@ -115,13 +114,12 @@ public class EventServiceImpl implements EventService {
 	public EventRegistration registerA(EventDescriptor descriptor,
 			RemoteEventListener listener, MarshalledObject handback,
 			long duration) throws LeaseDeniedException, UnknownEventException, RemoteException {
-		System.out.println("^%*&^%*&^%*&^%&*^%&^%&%&^%%%*^&^*&^%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		DispatchEventHandler handler = null;
 		if(handlers.get(descriptor) == null) {
 			try {
 				handler = new DispatchEventHandler(descriptor);
 			} catch (Exception e) {
-				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Exception: " + e);
+				System.out.println("Exception: " + e);
 				e.printStackTrace();
 				
 			}
@@ -131,7 +129,7 @@ public class EventServiceImpl implements EventService {
 		}
 		handler.register(this, listener, handback, duration);
 		handlers.put(descriptor, handler);
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Registered event id: " + descriptor.eventID);
+		System.out.println("Registered event id: " + descriptor.eventID);
 //		EventRegistration registration = register(descriptor, listener, handback, duration);
 		return null;
 	}

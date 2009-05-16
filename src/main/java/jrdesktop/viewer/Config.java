@@ -18,10 +18,9 @@ public class Config {
     public static int server_port = 6666;    
     
     public static void loadConfiguration() {
-    	System.out.println("########################################### viewer config = " + main.VIEWER_CONFIG_FILE);
+    	System.out.println("Viewer config = " + main.VIEWER_CONFIG_FILE);
         if (new File(main.VIEWER_CONFIG_FILE).canRead())
             try {
-            	System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
                 Properties properties = new Properties();            
                 properties.load(new FileInputStream(main.VIEWER_CONFIG_FILE));
                 

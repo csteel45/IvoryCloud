@@ -50,8 +50,8 @@ public class ViewerGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle(" jrdesktop Viewer");
-    	//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ viewer config = " + main.dir);
+        setTitle("Cloud Desktop Viewer");
+    	//System.out.println("Viewer config = " + main.dir);
         //setIconImage(new ImageIcon(main.WAIT_ICON).getImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -82,8 +82,10 @@ public class ViewerGUI extends javax.swing.JFrame {
                 JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
                 if (recorder.isRecording())                    
                     recorder.viewer.Stop();
-                    if (SysTray.isSupported()) 
+                    if (SysTray.isSupported()) {
                         dispose();
+                        System.exit(0);
+                    }
                     else
                         main.exit();
             }            

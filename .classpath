@@ -35,5 +35,5 @@
 	<classpathentry kind="lib" path="lib/tools/classdepandjar.jar"/>
 	<classpathentry kind="lib" path="lib/tools/jarbundler-2.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/tools/jmx-lookup.jar"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="build/classes"/>
 </classpath>
