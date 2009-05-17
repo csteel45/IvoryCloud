@@ -19,6 +19,7 @@ package com.ivorycloud.event;
 import java.rmi.MarshalledObject;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import jrdesktop.server.rmi.Server;
@@ -38,14 +39,14 @@ import org.rioproject.watch.StopWatch;
  * TODO Add class description
  *
  * @author Christopher Steel - Ivory Cloud, Inc.
- * @since 1.0 Apr 30, 2009 - 3:56:27 PM
+ * @since 1.0  - $Date: 2001/06/02 06:11:20 $ $Time: $
  */
 public class EventServiceImpl implements EventService {
 
     /** A local watch */
     private StopWatch watch = null;
     /** The Logger for this example */
-    static Logger logger = Logger.getLogger("event");
+    Logger logger = null;
     HashMap<EventDescriptor, DispatchEventHandler> handlers = 
     	new HashMap<EventDescriptor, DispatchEventHandler>();
 
@@ -53,7 +54,8 @@ public class EventServiceImpl implements EventService {
 	 * @param descriptor
 	 * @throws Exception
 	 */
-	public EventServiceImpl() throws Exception {
+	public EventServiceImpl() {
+		logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	}
 
 	/*
@@ -62,7 +64,10 @@ public class EventServiceImpl implements EventService {
      */
     public void setServiceBeanContext(ServiceBeanContext context) throws
                                                                   Exception {
-
+System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***************************************************************");
+logger.warning(")))))))))))))))))))))))))))))))))))))))))))))(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+        if(logger.isLoggable(Level.FINER))
+        	logger.entering(this.getClass().getName(), Thread.currentThread().getStackTrace()[0].getMethodName());
         // Create the stop watch, and register the stop watch
         watch = new StopWatch("EventServiceImplWatch");
         context.getWatchRegistry().register(watch);
@@ -72,6 +77,8 @@ public class EventServiceImpl implements EventService {
 		jrdesktop.server.Config.SetConfiguration(4545);        
         Server.Start();
         logger.info("Started remote desktop server on port 4545");
+        if(logger.isLoggable(Level.FINER))
+        	logger.exiting(this.getClass().getName(), Thread.currentThread().getStackTrace()[0].getMethodName());
     }
 
 	/* (non-Javadoc)
@@ -81,21 +88,26 @@ public class EventServiceImpl implements EventService {
 	public void publish(RemoteServiceEvent event) throws RemoteException {
         try {
             /* Measure the time it takes to fire the event */
-//            watch.startTiming();
-    		System.out.println("^*************************************** publish called.");
+            watch.startTiming();
+            if(logger.isLoggable(Level.FINER))
+            	logger.entering(this.getClass().getName(), Thread.currentThread().getStackTrace()[0].getMethodName());
+            if(logger.isLoggable(Level.FINER))
+            	logger.warning("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ X");
             EventDescriptor descriptor = new EventDescriptor(event.getClass(), event.getID());
             DispatchEventHandler handler = (DispatchEventHandler)handlers.get(descriptor);
             if(handler == null) {
             	logger.warning("No consumers registered for event: " + event);
             	return;
             }
-            System.out.println("444444444444444444444444444444444444444444444444444444 EventServiceImpl.publish firing event: " + event);
+            System.out.println("EventServiceImpl.publish firing event: " + event);
             
             handler.fire(event);
-//            watch.stopTiming();
+            watch.stopTiming();
         } catch (Exception e) {
             logger.warning("Exception publishing event: " + event + " : " + e);
         }
+        if(logger.isLoggable(Level.FINER))
+        	logger.exiting(this.getClass().getName(), Thread.currentThread().getStackTrace()[0].getMethodName());
 	}
 	
 	public String getHostIP() throws RemoteException{

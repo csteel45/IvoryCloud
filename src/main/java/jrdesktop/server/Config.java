@@ -20,7 +20,6 @@ public class Config {
     public static boolean default_address = false;
     
     public static void loadConfiguration() {
-    	System.out.println("22222^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         if (new File(main.SERVER_CONFIG_FILE).canRead())
             try {
                 Properties properties = new Properties();            
