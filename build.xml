@@ -148,6 +148,7 @@
     
     <target name="deploy">
         <deploy file="src/main/conf/cloudbase.xml"/>
+        <deploy file="src/main/conf/cloudbilling.xml"/>
     </target>
 
     <target name="undeploy">
