@@ -64,9 +64,9 @@ public class EventServiceImpl implements EventService {
      */
     public void setServiceBeanContext(ServiceBeanContext context) throws
                                                                   Exception {
-System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***************************************************************");
-logger.warning(")))))))))))))))))))))))))))))))))))))))))))))(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+System.out.println("444@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***************************************************************");
         if(logger.isLoggable(Level.FINER))
+        	logger.warning("4444333333)))))))))))))))))))))))))))))))))))))))))))))(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
         	logger.entering(this.getClass().getName(), Thread.currentThread().getStackTrace()[0].getMethodName());
         // Create the stop watch, and register the stop watch
         watch = new StopWatch("EventServiceImplWatch");

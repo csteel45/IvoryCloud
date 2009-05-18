@@ -8,7 +8,7 @@
 
 		<Logging>
 			<Logger Name="ivorycloud" Level="ALL">
-				<Handler ClassName="java.util.logging.ConsoleHandler" Level="FINE"></Handler>
+				<Handler ClassName="java.util.logging.ConsoleHandler" Level="FINEST"></Handler>
 			</Logger>
 		</Logging>
 		
@@ -18,7 +18,7 @@
         service's classpath, declared by the JARs of the Implementation class
         -->
         <SpringBean Name="Translator" config="cloud-base.xml">
-
+	
             <Interfaces>
                 <Interface>com.ivorycloud.cloudbase.Translator</Interface>
                 <Resources>
@@ -53,7 +53,8 @@
                 </Resources>
             </ImplementationClass>
                         
-            <Maintain>1</Maintain>
+            <Maintain>2</Maintain>
+            <MaxPerMachine>1</MaxPerMachine>
         </SpringBean>
  
         <SpringBean Name="EventService" config="cloud-base.xml">
@@ -71,7 +72,8 @@
                 </Resources>
             </ImplementationClass>
                         
-            <Maintain>1</Maintain>
+            <Maintain>2</Maintain>
+            <MaxPerMachine>1</MaxPerMachine>
         </SpringBean>
         
     </OperationalString>

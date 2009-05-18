@@ -55,7 +55,7 @@ public class TranslatorImpl implements Translator {
 	/** A copy of the proxy we created */
 	/** The Logger for this example */
 	static Logger logger = Logger
-			.getLogger("tradinggrid.service.TranslatorImpl");
+			.getLogger("cloudbase.service.TranslatorImpl");
 
 	static TranslatorImpl instance;
 
@@ -88,13 +88,13 @@ public class TranslatorImpl implements Translator {
 		/*
 		 * Create the stop watch, and register the stop watch
 		 */
-		watch = new StopWatch("Translator Watch"
+		watch = new StopWatch("TranslatorImpl Watch"
 				+ context.getServiceBeanConfig().getInstanceID());
 		counter = new CounterWatch("Translator Counter Watch"
 				+ context.getServiceBeanConfig().getInstanceID());
 		context.getWatchRegistry().register(watch);
 		context.getWatchRegistry().register(counter);
-		logger.info("Initialized TranslatorImpl2");
+		logger.info("Initialized TranslatorImpl");
 		Thread.sleep(1000);
 
 		Runnable runner = new Runnable() {
