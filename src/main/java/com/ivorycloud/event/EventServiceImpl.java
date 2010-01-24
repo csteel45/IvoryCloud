@@ -91,8 +91,6 @@ System.out.println("444@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             watch.startTiming();
             if(logger.isLoggable(Level.FINER))
             	logger.entering(this.getClass().getName(), Thread.currentThread().getStackTrace()[0].getMethodName());
-            if(logger.isLoggable(Level.FINER))
-            	logger.warning("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ X");
             EventDescriptor descriptor = new EventDescriptor(event.getClass(), event.getID());
             DispatchEventHandler handler = (DispatchEventHandler)handlers.get(descriptor);
             if(handler == null) {
