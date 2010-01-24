@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE opstring SYSTEM "java://org/jini/rio/dtd/rio_opstring.dtd">
+		
+<opstring>
+
+    <OperationalString Name="Cloud Base">
+<SoftwareLoad>
+	<Download Source="https://elastic-grid.s3.amazonaws.com/tomcat/apache-tomcat-6.0.16.zip" InstallRoot="${RIO_HOME}/system/external/tomcat" Unarchive="yes" Overwrite="yes">
+		<Location>.</Location>
+	</Download>
+</SoftwareLoad>
+        <Groups>
+            <Group>rio</Group>
+        </Groups>
+
+		<Logging>
+			<Logger Name="ivorycloud" Level="ALL">
+				<Handler ClassName="java.util.logging.ConsoleHandler" Level="FINEST"></Handler>
+			</Logger>
+		</Logging>
+		
+		
+        <!--
+        Declare attributes for the Spring-based service. The CloudBase spring bean
+        configuration will be loaded as a classpath resource from the
+        service's classpath, declared by the JARs of the Implementation class
+        -->
+        <SpringBean Name="Translator" config="cloud-base.xml">
+	
+            <Interfaces>
+                <Interface>com.ivorycloud.cloudbase.Translator</Interface>
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbase-dl.jar</JAR>
+                </Resources>
+            </Interfaces>
+
+            <ImplementationClass>com.ivorycloud.cloudbase.service.TranslatorImpl
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbase.jar</JAR>
+                </Resources>
+            </ImplementationClass>
+                        
+            <Maintain>2</Maintain>
+            <MaxPerMachine>1</MaxPerMachine>
+            
+            
+        </SpringBean>
+ 
+        <SpringBean Name="BillingService" config="cloud-base.xml">
+
+            <Interfaces>
+                <Interface>com.ivorycloud.cloudbase.BillingService</Interface>
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbase-dl.jar</JAR>
+                </Resources>
+            </Interfaces>
+
+            <ImplementationClass>com.ivorycloud.cloudbase.service.BillingServiceImpl
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbase.jar</JAR>
+                </Resources>
+            </ImplementationClass>
+                        
+            <Maintain>2</Maintain>
+            <MaxPerMachine>1</MaxPerMachine>
+        </SpringBean>
+ 
+        <SpringBean Name="EventService" config="cloud-base.xml">
+
+            <Interfaces>
+                <Interface>com.ivorycloud.event.EventService</Interface>
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbase-dl.jar</JAR>
+                </Resources>
+            </Interfaces>
+
+            <ImplementationClass>com.ivorycloud.event.EventServiceImpl
+                <Resources>
+                    <JAR>cloudbase/lib/cloudbase.jar</JAR>
+                </Resources>
+            </ImplementationClass>
+                        
+            <Maintain>2</Maintain>
+            <MaxPerMachine>1</MaxPerMachine>
+        </SpringBean>
+        
+    </OperationalString>
+</opstring>
+
+
